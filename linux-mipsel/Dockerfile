@@ -3,13 +3,8 @@ MAINTAINER Sergi Alvarez "pancake@nopcode.org"
 
 # This is for ARMv5 "legacy" (mipsel) devices which do NOT support hard float
 # VFP instructions (mipshf).
-
-# From https://wiki.debian.org/CrossToolchains, installing for jessie
-RUN echo "deb http://emdebian.org/tools/debian/ jessie main" > /etc/apt/sources.list.d/emdebian.list \
-&& curl http://emdebian.org/tools/debian/emdebian-toolchain-archive.key | apt-key add - \
-&& sed -i 's/httpredir.debian.org/http.debian.net/' /etc/apt/sources.list \
-&& dpkg --add-architecture mipsel \
-&& apt-get update && apt-get install -y crossbuild-essential-mipsel
+RUN dpkg --add-architecture mipsel && apt-get update
+RUN apt-get -y update && apt-get install -y crossbuild-essential-mipsel
 
 # The cross-compiling emulator
 RUN apt-get update && apt-get install -y \

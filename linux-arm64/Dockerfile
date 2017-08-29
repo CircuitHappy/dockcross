@@ -1,29 +1,17 @@
 FROM dockcross/base:latest
 MAINTAINER Matt McCormick "matt.mccormick@kitware.com"
 
-# Add the cross compiler sources
-RUN echo "deb http://emdebian.org/tools/debian/ jessie main" >> /etc/apt/sources.list && \
-  dpkg --add-architecture arm64 && \
-  curl http://emdebian.org/tools/debian/emdebian-toolchain-archive.key | apt-key add -
+RUN dpkg --add-architecture arm64 && apt-get update
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get -y update && apt-get install -y \
   crossbuild-essential-arm64 \
   gfortran-aarch64-linux-gnu \
   libbz2-dev:arm64 \
   libexpat1-dev:arm64 \
   ncurses-dev:arm64 \
-  libssl-dev:arm64
+  libssl-dev:arm64 \
+  qemu-system-arm
 
-WORKDIR /usr/src
-
-RUN apt-get update && \
-  apt-get install -y libglib2.0-dev zlib1g-dev libpixman-1-dev && \
-  curl -L http://wiki.qemu-project.org/download/qemu-2.6.0.tar.bz2 | tar xj && \
-  cd qemu-2.6.0 && \
-  ./configure --target-list=aarch64-linux-user --prefix=/usr && \
-  make -j$(nproc) && \
-  make install && \
-  cd .. && rm -rf qemu-2.6.0
 
 ENV CROSS_TRIPLE aarch64-linux-gnu
 ENV CROSS_ROOT /usr/${CROSS_TRIPLE}

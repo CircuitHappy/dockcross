@@ -42,8 +42,8 @@ while [ $# -gt 0 ]; do
   shift
 done
 
-OPENSSL_VERSION=1.0.2j
-OPENSSL_SHA256=e7aff292be21c259c6af26469c7a9b3ba26e9abaaffd325e3dccc9785256c431
+OPENSSL_VERSION=1.1.0f
+OPENSSL_SHA256=12f746f3f2493b2f39da7ecf63d7ee19c6ac9ec6a4fcd8c229da8a522cb12765
 
 cd /usr/src
 

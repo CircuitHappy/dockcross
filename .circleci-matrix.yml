@@ -32,9 +32,9 @@ command:
 
           time make base.test
 
-          echo "Saving debian:jessie dockcross/base into ~/docker cache"
-          mkdir -p ~/docker; time docker save -o ~/docker/base.tar debian:jessie dockcross/base
-          echo "Saving debian:jessie dockcross/base into ~/docker cache - done"
+          echo "Saving debian:stretch dockcross/base into ~/docker cache"
+          mkdir -p ~/docker; time docker save -o ~/docker/base.tar debian:stretch dockcross/base
+          echo "Saving debian:stretch dockcross/base into ~/docker cache - done"
 
           touch ~/BASE_AVAILABLE
         else

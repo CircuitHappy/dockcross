@@ -28,7 +28,7 @@ Cross compilers
   :target: https://microbadger.com/images/dockcross/base
 
 dockcross/base
-  |base-images| Base image for other toolchain images. From Debian Jessie with GCC,
+  |base-images| Base image for other toolchain images. From Debian Streth with GCC,
   make, autotools, CMake, Ninja, Git, and Python.
 
 

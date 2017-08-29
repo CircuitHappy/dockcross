@@ -45,10 +45,10 @@ done
 cd /usr/src
 
 # Download
-CMAKE_REV=v3.8.0
+CMAKE_REV=v3.9.1
 wget --progress=bar:force https://github.com/kitware/cmake/archive/$CMAKE_REV.tar.gz -O CMake.tar.gz
 mkdir CMake
-tar -xzvf ./CMake.tar.gz --strip-components=1 -C ./CMake
+tar -xzf ./CMake.tar.gz --strip-components=1 -C ./CMake
 
 mkdir /usr/src/CMake-build
 
@@ -66,29 +66,6 @@ ${WRAPPER} make install -j$NUM_PROCESSOR
 
 # Test
 ctest -R CMake.FileDownload
-
-# Write test script
-cat <<EOF > cmake-test-https-download.cmake
-
-file(
-  DOWNLOAD https://raw.githubusercontent.com/Kitware/CMake/master/README.rst /tmp/README.rst
-  STATUS status
-  )
-list(GET status 0 error_code)
-list(GET status 1 error_msg)
-if(error_code)
-  message(FATAL_ERROR "error: Failed to download ${url} - ${error_msg}")
-else()
-  message(STATUS "CMake: HTTPS download works")
-endif()
-
-file(REMOVE /tmp/README.rst)
-
-EOF
-
-# Execute test script
-cmake -P cmake-test-https-download.cmake
-rm cmake-test-https-download.cmake
 
 popd
 

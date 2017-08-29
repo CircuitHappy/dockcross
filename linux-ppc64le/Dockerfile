@@ -1,12 +1,9 @@
 FROM dockcross/base:latest
 MAINTAINER Matt McCormick "matt.mccormick@kitware.com"
 
-# Add the cross compiler sources
-RUN echo "deb http://emdebian.org/tools/debian/ jessie main" >> /etc/apt/sources.list && \
-  dpkg --add-architecture ppc64el && \
-  curl http://emdebian.org/tools/debian/emdebian-toolchain-archive.key | apt-key add -
+RUN dpkg --add-architecture ppc64el && apt-get update
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get -y update && apt-get install -y \
   crossbuild-essential-ppc64el \
   gfortran-powerpc64le-linux-gnu \
   libbz2-dev:ppc64el \
